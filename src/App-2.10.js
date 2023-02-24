@@ -4,22 +4,6 @@ const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '044-1234567' }
   ])
-
-  return (
-    <div>
-      <h2>Phonebook</h2>
-      <Form persons={persons} setPersons={setPersons} />
-      <h2>Numbers</h2>
-      {persons.map(person =>
-        <div key={person.name}>
-          {person.name} {person.number}
-        </div>
-      )}
-    </div>
-  )
-}
-
-const Form = ({ persons, setPersons }) => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
 
@@ -48,6 +32,17 @@ const Form = ({ persons, setPersons }) => {
   }
 
   return (
+    <div>
+      <h2>Phonebook</h2>
+      <PersonForm addPerson={addPerson} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} newName={newName} newNumber={newNumber} />
+      <h2>Numbers</h2>
+      <Persons persons={persons} />
+    </div>
+  )
+}
+
+const PersonForm = ({ addPerson, handleNameChange, handleNumberChange, newName, newNumber }) => {
+  return (
     <form onSubmit={addPerson}>
       <div>name: <input value={newName} onChange={handleNameChange} /></div>
       <div>number: <input value={newNumber} onChange={handleNumberChange} /></div>
@@ -55,5 +50,17 @@ const Form = ({ persons, setPersons }) => {
     </form>
   )
 }
+
+const Persons = ({ persons }) => {
+  return (
+    <div>
+      {persons.map(person =>
+        <Person key={person.name} name={person.name} number={person.number}/>
+      )}
+    </div>
+  )
+}
+
+const Person = ({ name, number }) => <div>{name} {number}</div>
 
 export default App
