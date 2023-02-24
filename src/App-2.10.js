@@ -4,6 +4,22 @@ const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '044-1234567' }
   ])
+
+  return (
+    <div>
+      <h2>Phonebook</h2>
+      <Form persons={persons} setPersons={setPersons} />
+      <h2>Numbers</h2>
+      {persons.map(person =>
+        <div key={person.name}>
+          {person.name} {person.number}
+        </div>
+      )}
+    </div>
+  )
+}
+
+const Form = ({ persons, setPersons }) => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
 
@@ -31,21 +47,6 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
-  return (
-    <div>
-      <h2>Phonebook</h2>
-      <Form addPerson={addPerson} handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} newName={newName} newNumber={newNumber} />
-      <h2>Numbers</h2>
-      {persons.map(person =>
-        <div key={person.name}>
-          {person.name} {person.number}
-        </div>
-      )}
-    </div>
-  )
-}
-
-const Form = ({ addPerson, handleNameChange, handleNumberChange, newName, newNumber }) => {
   return (
     <form onSubmit={addPerson}>
       <div>name: <input value={newName} onChange={handleNameChange} /></div>
