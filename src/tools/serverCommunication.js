@@ -9,4 +9,12 @@ const create = newObject => {
   return axios.post(baseUrl, newObject).then(response => response.data)
 }
 
-export default { getAll, create }
+const remove = id => {
+  axios
+    .delete(`${baseUrl}/${id}`)
+    .catch(error => {alert(`the person was already deleted from server`)})
+}
+
+const methods = { getAll, create, remove }
+
+export default methods
