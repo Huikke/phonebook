@@ -5,8 +5,8 @@ const getAll = () => {
   return axios.get(baseUrl).then(response => response.data)
 }
 
-const create = newObject => {
-  return axios.post(baseUrl, newObject).then(response => response.data)
+const create = newPerson => {
+  return axios.post(baseUrl, newPerson).then(response => response.data)
 }
 
 const remove = id => {
@@ -15,6 +15,14 @@ const remove = id => {
     .catch(error => {alert(`the person was already deleted from server`)})
 }
 
-const methods = { getAll, create, remove }
+const update = (id, newPerson) => {
+  return (
+    axios
+      .put(`${baseUrl}/${id}`, newPerson)
+      .then(response => response.data)
+  )
+}
+
+const methods = { getAll, create, remove, update }
 
 export default methods
