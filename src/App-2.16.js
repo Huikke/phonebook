@@ -33,6 +33,8 @@ const App = () => {
             .then(updatedData => {
               setPersons(persons.map(p => p.id !== person.id ? p : updatedData))
             })
+          setNewName('')
+          setNewNumber('')
         }
       }
     } else {
